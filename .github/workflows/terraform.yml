@@ -1,0 +1,37 @@
+name: Aws infraestrutura
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v2
+    
+      - name: Configurando a AWS Credentials Action para o GitHub Actions
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: us-east-1
+      - name: Setup Terraform CLI
+        uses: hashicorp/setup-terraform@v2.0.2
+
+      - name: Terraform Init - Iniciando
+        run: terraform init
+
+      - name: Terraform Apply - Aplicando
+        run: |
+          terraform apply -auto-approve -var "aws_access_key=${{ secrets.AWS_ACCESS_KEY }}" -var "aws_secret_key=${{ secrets.AWS_SECRET_KEY }}"
+
+      - name: EKS Cluster Endpoint
+        id: eks
+        run: echo "::set-output name=endpoint::$(terraform output cluster_endpoint)"
+
+      - name: Uso EKS Cluster Endpoint
+        run: echo "EKS Cluster Endpoint is ${{ steps.eks.outputs.endpoint }}"
