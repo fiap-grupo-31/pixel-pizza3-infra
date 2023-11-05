@@ -2,7 +2,6 @@
 [![AWS](https://img.shields.io/badge/AWS-supported-orange.svg)](https://aws.amazon.com/)
 
 
-
 # Tech Challenge - Fase 03 (GRUPO 31) - AWS Infraestrutura
 
 Este repositório o terraform para criação dos seguintes itens:
