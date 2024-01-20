@@ -40,6 +40,15 @@ module "vpc" {
   }
 }
 
+resource "aws_security_group_rule" "allow_mysql_ingress" {
+  type        = "ingress"
+  from_port   = 3306
+  to_port     = 3306
+  protocol    = "tcp"
+  cidr_blocks = [module.vpc.vpc_cidr_block]
+  security_group_id = module.vpc.default_security_group_id
+}
+
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "19.15.3"
@@ -64,6 +73,7 @@ module "eks" {
       min_size     = 1
       max_size     = 1
       desired_size = 1
+      kms_key_id = null
     },
     two = {
       name = "node-group-2"
@@ -73,7 +83,7 @@ module "eks" {
       min_size     = 1
       max_size     = 1
       desired_size = 1
+      kms_key_id = null
     }
   }
 }
-
