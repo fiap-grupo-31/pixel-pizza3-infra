@@ -87,3 +87,20 @@ module "eks" {
     }
   }
 }
+
+resource "aws_mq_broker" "rabbitmq" {
+  broker_name = "pixels-rabbitmq-broker"
+  engine_type = "RabbitMQ"
+  engine_version = "3.11.28"
+  host_instance_type = "mq.t3.micro"
+  security_groups = [module.vpc.default_security_group_id]
+  subnet_ids = [module.vpc.public_subnets[0]] 
+  publicly_accessible = true
+  
+  user {
+    username = "admin"
+    password = "XMrGrqVfew4YSDeQ"
+    console_access = true
+    groups = ["admin"]
+  }
+}

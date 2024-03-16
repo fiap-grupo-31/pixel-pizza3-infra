@@ -1,7 +1,7 @@
 [![Terraform Registry](https://img.shields.io/badge/Terraform%20Registry-available-blue.svg)](https://registry.terraform.io/modules/seu-nome-de-usuario/seu-modulo)
 [![AWS](https://img.shields.io/badge/AWS-supported-orange.svg)](https://aws.amazon.com/)
 
-# Tech Challenge - Fase 04 (GRUPO 31) - AWS Infraestrutura
+# Tech Challenge - Fase 05 (GRUPO 31) - AWS Infraestrutura
 
 Este repositório o terraform para criação dos seguintes itens:
 
