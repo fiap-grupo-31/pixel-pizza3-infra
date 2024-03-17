@@ -54,7 +54,7 @@ module "eks" {
   version = "19.15.3"
 
   cluster_name    = local.cluster_name
-  cluster_version = "1.28"
+  cluster_version = "1.29"
 
   vpc_id                         = module.vpc.vpc_id
   subnet_ids                     = module.vpc.private_subnets
@@ -93,7 +93,6 @@ resource "aws_mq_broker" "rabbitmq" {
   engine_type = "RabbitMQ"
   engine_version = "3.11.28"
   host_instance_type = "mq.t3.micro"
-  security_groups = [module.vpc.default_security_group_id]
   subnet_ids = [module.vpc.public_subnets[0]] 
   publicly_accessible = true
   
