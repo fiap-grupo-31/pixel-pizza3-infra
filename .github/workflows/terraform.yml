@@ -28,10 +28,3 @@ jobs:
       - name: Terraform Apply - Aplicando
         run: |
           terraform apply -auto-approve -var "aws_access_key=${{ secrets.AWS_ACCESS_KEY }}" -var "aws_secret_key=${{ secrets.AWS_SECRET_KEY }}"
-
-      - name: EKS Cluster Endpoint
-        id: eks
-        run: echo "::set-output name=endpoint::$(terraform output cluster_endpoint)"
-
-      - name: Uso EKS Cluster Endpoint
-        run: echo "EKS Cluster Endpoint is ${{ steps.eks.outputs.endpoint }}"
